@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Notre Love Jar ✨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Palette Chaleureuse & Amour */
+            --bg-color: #fdf2e9; /* Crème chaud / Pêche très clair */
+            --accent-color: #b03a2e; /* Rouge brique profond */
+            --warm-amber: #e67e22; /* Ambre pour la chaleur */
+            --text-color: #5d4037; /* Marron boisé pour le texte */
+            --card-bg: #fffaf0; /* Ivoire pour les cartes */
+            --r: 0deg;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Dégradé radial pour un effet de lumière de bougie au centre */
+            background: radial-gradient(circle, #fdf2e9 0%, #f5e6d3 100%);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            max-width: 450px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-weight: 400;
+            font-size: 1.2rem;
+            margin: 0 0 30px 0;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        /* Bouton style Sceau de cire / Chaleureux */
+        .jar-button {
+            background: var(--accent-color);
+            border: none;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            box-shadow: 0 10px 25px rgba(176, 58, 46, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            z-index: 10;
+        }
+
+        .jar-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(176, 58, 46, 0.4);
+        }
+
+        .jar-button:active { transform: scale(0.9); }
+
+        #message-container {
+            margin-top: 30px;
+            min-height: 380px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1200px;
+        }
+
+        .vibe-card {
+            background: var(--card-bg);
+            box-shadow: 0 15px 45px rgba(93, 64, 55, 0.15);
+            animation: popIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            backface-visibility: hidden;
+            border: 1px solid rgba(176, 58, 46, 0.05);
+        }
+
+        .polaroid-card {
+            padding: 12px 12px 40px 12px;
+            border-radius: 4px;
+            width: 85%;
+            max-width: 320px;
+        }
+
+        .polaroid-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 2px;
+            filter: sepia(10%) contrast(105%); /* Léger effet chaleureux sur les photos */
+        }
+
+        .polaroid-caption {
+            font-family: 'Caveat', cursive;
+            font-size: 2.2rem;
+            color: var(--accent-color);
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .text-card {
+            padding: 50px 35px;
+            border-radius: 30px;
+            max-width: 300px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: var(--accent-color);
+            text-align: center;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        /* Petit ornement pour la carte texte */
+        .text-card::after {
+            content: "♥";
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.3;
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8) translateY(40px) rotate(-5deg); }
+            100% { opacity: 1; transform: scale(1) translateY(0) rotate(var(--r)); }
+        }
+
+        .heart { color: var(--warm-amber); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Notre Love Jar <span class="heart">♥</span></h1>
+    <button class="jar-button" id="pick-button" aria-label="Piocher un souvenir">✨</button>
+    <div id="message-container"></div>
+</div>
+
+<script>
+    (function() {
+        const memories = [
+            { type: 'text', content: "Tu as changé ma vie ❤️" },
+            { type: 'text', content: "Merci de me faire autant rire" },
+            { type: 'text', content: "J'adore passer du temps avec toi, merci d'être là" },
+            { type: 'text', content: "Si tu te voyais avec mes yeux, tu ne douterais jamais de toi." },
+            { type: 'text', content: "Tu as ce don de rendre tout plus beau autour de toi." },
+            { type: 'text', content: "Juste un petit mot pour te dire que je suis fier de toi." },
+            { type: 'text', content: "Je t'aime ❤️" },
+            { type: 'text', content: "Je t'aime Je t'aime Je t'aime Je t'aime Je t'aime Je t'aime Je t'aime Je t'aime Je t'aime Je t'aime Je t'aime Je t'aime Je t'aime Je t'aime Je t'aime" },
+            
+            { type: 'photo', url: "https://i.postimg.cc/j5XJpv5F/IMG-2982.jpg", cap: "💋👞✨" },
+            { type: 'photo', url: "https://i.postimg.cc/fLK0G5yQ/IMG-3369.jpg", cap: "🏛️❤️" },
+            { type: 'photo', url: "https://i.postimg.cc/tT5VKDJH/IMG-3402.jpg", cap: "🏍️💨" },
+            { type: 'photo', url: "https://i.postimg.cc/pTZnwkTZ/IMG-3883.jpg", cap: "✨❤️" },
+            { type: 'photo', url: "https://i.postimg.cc/KzFMpCZJ/IMG-4008.jpg", cap: "💋🛗" },
+            { type: 'photo', url: "https://i.postimg.cc/gJdZt1Yn/IMG-4110.jpg", cap: "🤪😂" },
+            { type: 'photo', url: "https://i.postimg.cc/9Mpq61MS/IMG-4276.jpg", cap: "☀️🇲🇦" },
+            { type: 'photo', url: "https://i.postimg.cc/sXyhHbVP/IMG-4379.jpg", cap: "👗✨" },
+            { type: 'photo', url: "https://i.postimg.cc/tTyxv8XX/IMG-4421.jpg", cap: "👩‍❤️‍👨❤️" }
+        ];
+
+        const texts = memories.filter(m => m.type === 'text');
+        const photos = memories.filter(m => m.type === 'photo');
+
+        let lastTextIndex = -1;
+        let lastPhotoIndex = -1;
+        let showPhotoNext = false; 
+
+        const container = document.getElementById('message-container');
+        const button = document.getElementById('pick-button');
+
+        function pick() {
+            let item;
+            
+            if (showPhotoNext) {
+                let i;
+                do { i = Math.floor(Math.random() * photos.length); } while (i === lastPhotoIndex);
+                lastPhotoIndex = i;
+                item = photos[i];
+            } else {
+                let i;
+                do { i = Math.floor(Math.random() * texts.length); } while (i === lastTextIndex);
+                lastTextIndex = i;
+                item = texts[i];
+            }
+
+            showPhotoNext = !showPhotoNext;
+
+            const rot = (Math.random() * 6 - 3).toFixed(2);
+            container.style.setProperty('--r', `${rot}deg`);
+
+            if (item.type === 'text') {
+                const fontSize = item.content.length > 60 ? '1.1rem' : '1.3rem';
+                container.innerHTML = `<div class="vibe-card text-card" style="font-size:${fontSize}">${item.content}</div>`;
+            } else {
+                container.innerHTML = `
+                    <div class="vibe-card polaroid-card">
+                        <img src="${item.url}" alt="Souvenir">
+                        <div class="polaroid-caption">${item.cap}</div>
+                    </div>`;
+            }
+        }
+
+        button.addEventListener('click', pick);
+    })();
+</script>
+</body>
+</html>
